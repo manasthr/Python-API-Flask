@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Flask Live Data Search using Jquery Ajax and MySql Database</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  load_data();
+  function load_data(query)
+  {
+   $.ajax({
+    url:"/livesearch",
+    method:"POST",
+    data:{query:query},
+    success:function(data)
+    {
+      $('#result').html(data);
+      $("#result").append(data.htmlresponse);
+    }
+   });
+  }
+  $('#search_text').keyup(function(){
+    var search = $(this).val();
+    if(search != ''){
+    load_data(search);
+   }else{
+    load_data();
+   }
+  });
+});
+</script>
+</head>
+<body>
+    
+<div class="container search-table">
+<p><h2 align="center"> Find condo from databases </h2></p>
+<form>
+            <div class="thought-bubble">
+                <div class="thought-bubble-tail"></div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Search</h5>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="search_text" id="search_text" class="form-control" placeholder="ex. ทองหล่อ สุขุมวิท">
+   
+                    </div> 
+                </div>
+            </div>
+        </form>
+   <div id="result"></div>
+</div>
+<style>
+.search-table{
+    background-image: url("https://i.pinimg.com/564x/4b/f7/bd/4bf7bd9a1b99294fea9a9a3931eafd61.jpg");
+  background-color: lightgreen;
+  border-radius: 0;
+  padding: 10% 0;
+    
+    margin-top: -6%;
+}
+.search-box{
+    background: #c1c1c1;
+    border: 1px solid #ababab;
+    padding: 3%;
+}
+ 
+.thought-bubble input {
+    border: none;
+    font-size: 18px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #c1c1c1;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto; /* This will center the element */
+    color: #00f;
+        }
+      
+
+.search-list{
+    background: #fff;
+    border: 1px solid #ababab;
+    border-top: none;
+}
+.search-list h3{
+    background: #eee;
+    padding: 3%;color:#fe6f41;
+    margin-bottom: 0%;
+}
+body {
+    background-color: pink;
+  }
+  .thought-bubble {
+    background: #c1c1c1;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .text-color {
+    color: #00f; /* This will change the color of the text to blue */
+    /*<input type="text" name="search_text" id="search_text" class="form-control text-color" placeholder="Search all fields e.g. HTML">*/
+  }
+  .thought-bubble-tail {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid #c1c1c1;
+    position: absolute;
+    bottom: -100px;
+    left: calc(50% - 50px);
+  }
+</style>
+</body>
+</html>

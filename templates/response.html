@@ -1,0 +1,20 @@
+<br>
+<h3>{{numrows}} items </h3>
+<table class="table table-striped custab">
+  <thead>
+      <tr>
+         <th>Details</th>
+         <th>Project</th>
+         <th>Location</th>
+         <th>Price</th>
+      </tr>
+  </thead>
+  <tbody>
+{% for row in employee %}  
+   <tr>
+    <td>{{row.Details}}</td>
+    <td>{{row.Project}}</td>
+    <td>{{row.Location}}</td>
+    <td>{{row.Price}}</td>
+   </tr>
+{% endfor %} 
